@@ -86,6 +86,28 @@ app.get("/chart", (req, res) => {
   res.send("sended");
 });
 
+app.get("/oee", (req, res) => {
+  const status = [10, 11, 20, 30];
+
+  let mockedData = [];
+  for (let i = 1; i <= 10; i++) {
+    const oee_a = Math.floor(Math.random() * 100);
+    const oee_p = Math.floor(Math.random() * 100);
+    const oee_q = Math.floor(Math.random() * 100);
+    const oee = Math.floor(Math.random() * 100);
+    mockedData.push({
+      today: "2021-03-06T08:00:00.000Z",
+      d: i,
+      oee_a,
+      oee_p,
+      oee_q,
+      oee,
+    });
+  }
+  io.emit("oee-1", mockedData);
+  res.send("sended");
+});
+
 io.on("connection", (socket) => {});
 
 http.listen(9009, () => {
