@@ -10,7 +10,7 @@ var cors = require("cors");
 app.use(cors());
 
 app.get("/notification", (req, res) => {
-  const status = [10, 11, 20, 30];
+  const status = [0, 1, 10, 11, 20, 30, 40, 41, 50];
   const index = Math.floor(Math.random() * 3);
   const mockedData = {
     noti_id: 1,
