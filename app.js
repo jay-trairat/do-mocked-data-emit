@@ -72,7 +72,10 @@ app.get("/chart", (req, res) => {
   let mockedData = [];
   for (let i = 1; i <= 12; i++) {
     const plan = Math.floor(Math.random() * 100);
-    const actual = plan - Math.floor(Math.random() * 10);
+    let actual = plan - Math.floor(Math.random() * 50);
+    if (actual < 0) {
+      actual = 0;
+    }
     mockedData.push({
       Hours: i,
       Plans: plan,
