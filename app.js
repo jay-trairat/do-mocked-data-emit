@@ -10,7 +10,7 @@ var cors = require("cors");
 app.use(cors());
 
 app.get("/notification", (req, res) => {
-  const status = [0, 1, 10, 11, 20, 30, 40, 41, 50];
+  const status = [10, 11, 20, 30];
   const index = Math.floor(Math.random() * 3);
   const mockedData = {
     noti_id: 1,
@@ -23,16 +23,18 @@ app.get("/notification", (req, res) => {
 });
 
 app.get("/status", (req, res) => {
-  const status = [10, 11, 20, 30];
-  const index = Math.floor(Math.random() * 3);
+  const { type } = req.query;
+  const status = [0, 1, 10, 11, 20, 30, 40, 41, 50];
+  const index = Math.floor(Math.random() * 8);
+  const statusType = type || status[index];
   const mockedData = {
     noti_id: 1,
     mcid: 1,
     noti_date: new Date(),
-    current_state: status[index],
+    current_state: statusType,
   };
   io.emit("status-1", mockedData);
-  res.send("sended");
+  res.send(`sended ${statusType}`);
 });
 
 app.get("/ng", (req, res) => {
