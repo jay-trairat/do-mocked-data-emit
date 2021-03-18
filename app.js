@@ -24,11 +24,14 @@ app.get("/notification", (req, res) => {
 
 app.get("/status", (req, res) => {
   const { type } = req.query;
+
   const status = [0, 1, 10, 11, 20, 30, 40, 41, 50];
   const index = Math.floor(Math.random() * 8);
-  const statusType = type || status[index];
+
+  let statusType = type || status[index];
+  statusType = parseInt(statusType);
   const mockedData = {
-    noti_id: 1,
+    noti_id: new Date(),
     mcid: 1,
     noti_date: new Date(),
     current_state: statusType,
